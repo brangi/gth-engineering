@@ -33,7 +33,7 @@ app.get('/article-view-count', async (req, res) => {
 
         res.json({ article, month: `${formattedStart.slice(0, 6)}`, viewCount });
     } catch (error) {
-        console.error('Error fetching article view count:', error);
+        console.info('Error fetching article view count:');
         // Check if error response is from Wikipedia API
         if (error.response) {
             // Wikipedia API error
