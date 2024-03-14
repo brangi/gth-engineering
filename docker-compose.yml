@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    container_name: article-view-count-app-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    environment:
+      - NODE_ENV=development
+      - WIKIPEDIA_API_URL=https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/all-agents
+    command: nodemon app.js

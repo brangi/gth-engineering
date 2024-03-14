@@ -51,7 +51,7 @@ app.get('/article-view-count', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server on ${process.env.NODE_ENV} running on port ${port}`);
 });
 
 module.exports = app;

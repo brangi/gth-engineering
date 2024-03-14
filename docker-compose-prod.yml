@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  app:
+    container_name: article-view-count-app-prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - WIKIPEDIA_API_URL=https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/all-agents
+    command: node app.js
