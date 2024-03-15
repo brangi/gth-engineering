@@ -1,5 +1,5 @@
 
-### Introduction
+## Introduction
 
 This documentation provides details on the API endpoints and setup instructions for the Docker environment of the `gth-engineering-hometake` project. The project includes a Node.js application that interfaces with the Wikipedia API to fetch and return the view count of a specified article for a given month.
 
@@ -112,6 +112,56 @@ For production:
 docker-compose -f docker-compose-prod.yml up --build
 ```
 
-### Conclusion
 
-This documentation covers the basic usage and setup for the `gth-engineering-hometake` project. For more detailed information about the application logic, refer to the source code and comments within the `app.js`, `app.test.js`, and Docker configuration files.
+## Deploying a Kubernetes cluster
+
+### Step 1: Install Minikube and kubectl
+
+First, you need to install Minikube and kubectl:
+
+- **Minikube** is a tool that lets you run Kubernetes locally.
+- **kubectl** is a command-line tool for interacting with Kubernetes clusters.
+
+Follow the installation instructions for Minikube [here](https://minikube.sigs.k8s.io/docs/start/) and kubectl [here](https://kubernetes.io/docs/tasks/tools/).
+
+### Step 2: Start a Minikube cluster
+
+Once Minikube is installed, start your Kubernetes cluster by running:
+
+```bash
+minikube start
+```
+
+This command creates and configures a virtual machine that runs a single-node Kubernetes cluster. This process can take a few minutes to complete.
+
+### Step 3: cd to the cluster directory
+
+```bash
+cd /cluster
+```
+
+### Step 4: Deploy to Kubernetes
+
+Build your Docker image and tag it appropriately. If you're running Minikube, you might want to use Minikube's Docker environment to build your image so that it's available to the Minikube cluster:
+
+```bash
+eval $(minikube docker-env)
+docker build -f ../Dockerfile.prod -t article-view-count-app:prod ../
+```
+
+Then, apply your deployment and service configuration to the cluster:
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+
+### Step 5: Access your application
+
+Since the service type is set to `LoadBalancer`, Minikube can make the application accessible via the `minikube service` command:
+
+```bash
+minikube service article-view-count-app-service
+```
+
+This command will open your web browser to the URL hosting your application. Use the URL to test the endpoint
