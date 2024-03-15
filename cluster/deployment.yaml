@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: article-view-count-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: article-view-count-app
+  template:
+    metadata:
+      labels:
+        app: article-view-count-app
+    spec:
+      containers:
+        - name: article-view-count-app
+          image: article-view-count-app:prod
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: WIKIPEDIA_API_URL
+              value: "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/all-agents"
