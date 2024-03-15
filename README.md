@@ -1,7 +1,7 @@
 
-## Introduction
+## API Documentation
 
-This documentation provides details on the API endpoints and setup instructions for the Docker environment of the `gth-engineering-hometake` project. The project includes a Node.js application that interfaces with the Wikipedia API to fetch and return the view count of a specified article for a given month.
+This documentation provides details on the API endpoint and setup instructions for the Docker environment of the `gth-engineering-hometake` project. The project includes a Node.js application that interfaces with the Wikipedia API to fetch and return the view count of a specified article for a given month.
 
 ### Getting Started
 
@@ -41,17 +41,7 @@ npm test
 
 This command runs the test script defined in the `package.json` file, which in this case utilizes `jest` to run tests. Successful execution of the tests without errors indicates that the dependencies were correctly installed and the project setup is correct.
 
-### Additional Notes
-
-- **Node.js Version**: It's a good practice to check the Node.js version required by the project. Sometimes, projects are sensitive to the Node.js version due to features or dependencies. If the project specifies a required Node.js version, you may use tools like `nvm` (Node Version Manager) to switch between Node.js versions.
-- **Environment Variables**: Some projects require setting up environment variables before running the application. Check the project's documentation or `.env.example` file (if available) for required environment variables, and set them up accordingly.
-- **Running the Application**: Finally, to run the application locally, you might use a command like `npm start`, depending on how the project's `start` script is defined in `package.json`.
-
-By following these steps, you should be able to set up the `gth-engineering-hometake` project locally and get it running on your machine.
-
 To use this API, start the server by running `npm start` in your project's root directory. The server listens on port 3000 by default, but this can be customized through the `PORT` environment variable.
-
-### API Documentation
 
 #### API Endpoint
 
@@ -165,3 +155,59 @@ minikube service article-view-count-app-service
 ```
 
 This command will open your web browser to the URL hosting your application. Use the URL to test the endpoint
+
+## Using make
+
+### Makefile Documentation for Article View Count App
+
+The `Makefile` in this project simplifies several tasks related to Docker and Docker Compose, making it easier to manage the application's lifecycle in both development and production environments.
+
+#### Available Commands:
+
+- **`make build`**  
+  Builds the Docker containers for development purposes. This command utilizes the default `docker-compose.yml` file.
+
+- **`make build-prod`**  
+  Builds the Docker containers for production. This command uses a separate Docker Compose file (`docker-compose-prod.yml`) optimized for production environments.
+
+- **`make up`**  
+  Starts the Docker containers in detached mode (in the background) for development. It uses the default `docker-compose.yml` file.
+
+- **`make up-prod`**  
+  Starts the Docker containers in detached mode for production, utilizing `docker-compose-prod.yml`.
+
+- **`make down`**  
+  Stops and removes the Docker containers, networks, and the default network, but not the volumes.
+
+- **`make logs`**  
+  Follows the logs from all containers. This is useful for debugging and monitoring the application logs in real-time.
+
+- **`make exec CMD="<command>"`**  
+  Executes a specific command inside the `app` container. Replace `<command>` with the actual command you wish to run. For example, to run `npm install` inside the container, use `make exec CMD="npm install"`.
+
+- **`make clean`**  
+  Stops containers and removes containers, networks, volumes, and images created by `up`.
+
+- **`make dev`**  
+  Starts the Docker containers in development mode with build process. This command is similar to `make up`, but it forces a build of the Docker images according to the `docker-compose.yml` file.
+
+#### Usage Example:
+
+To start your development environment, ensuring that Docker images are built or rebuilt based on your latest code changes, you can run:
+
+```bash
+make dev
+```
+
+To deploy your application in production, first build the production images, then start the containers:
+
+```bash
+make build-prod
+make up-prod
+```
+
+To stop the application and clean up resources:
+
+```bash
+make down
+```
