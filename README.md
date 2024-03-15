@@ -211,3 +211,29 @@ To stop the application and clean up resources:
 ```bash
 make down
 ```
+
+## Monitoring Strategy 
+
+### Deploying Kubernetes Cluster on AWS with Terraform
+
+The first objective is to leverage Terraform's Infrastructure as Code (IaC) capabilities to streamline the provisioning of the Kubernetes cluster on AWS. This approach enables us to define the infrastructure through code, making it reproducible, version-controlled, and easily adjustable to changing requirements.
+
+- **Infrastructure Planning**: Begin by outlining our infrastructure requirements, including networking resources, security groups, and the EKS cluster itself. This plan will serve as the foundation for our Terraform configurations.
+- **Terraform Configuration**: Craft Terraform files to declare our AWS resources meticulously. These configurations will detail the setup of the EKS cluster, associated worker nodes, and any requisite AWS services such as VPCs and IAM roles.
+- **Version Control**: All Terraform configurations will be version-controlled within the project repository, allowing for collaborative review and modification. This practice ensures that the infrastructure evolves alongside the application code.
+
+### Automating Deployments with CI/CD Pipelines
+
+To ensure smooth and reliable deployment processes, we'll set up CI/CD pipelines using GitHub Actions or GitLab CI, depending on our version control platform. These pipelines will automate the testing, building, and deployment phases of our development cycle, reducing manual intervention and promoting code quality.
+
+- **Pipeline Configuration**: We'll define pipeline stages that correspond to our deployment workflow. These stages will include linting, unit and integration testing, building Docker images, and deploying these images to our Kubernetes cluster.
+- **Docker and Kubernetes Integration**: Our pipeline will build Docker images of our application and push them to a container registry. Subsequently, it will update our Kubernetes deployment to use the latest image version, facilitating a rolling update of our application.
+- **Terraform Automation**: Integration of Terraform within our pipeline will automate the application of infrastructure changes. This setup ensures that any adjustments to our Terraform configurations are automatically reflected in our AWS environment upon merging code changes.
+
+### Integrating Datadog for Monitoring and Alerting
+
+With this deployment infrastructure and automation in place, our next step is to integrate Datadog for comprehensive monitoring and alerting. This integration will offer insights into our application's performance and the health of our infrastructure, enabling proactive issue resolution.
+
+- **Datadog Setup**: We'll install the Datadog Agent on our Kubernetes cluster to collect metrics, logs, and traces. This data will be instrumental in monitoring our application's operational health.
+- **Custom Metrics and Dashboards**: By defining custom metrics relevant to our application's performance, we can tailor our monitoring to the unique aspects of our environment. We'll use these metrics to build dashboards that provide real-time visibility into system performance.
+- **Alerting Configuration**: We'll configure alerts based on thresholds for critical metrics, ensuring that we're promptly notified of potential issues. These alerts will enable our team to quickly address problems before they impact our users.
