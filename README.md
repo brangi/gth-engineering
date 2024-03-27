@@ -1,11 +1,11 @@
 
 ## API Documentation
 
-This documentation provides details on the API endpoint and setup instructions for the Docker environment of the `gth-engineering-hometake` project. The project includes a Node.js application that interfaces with the Wikipedia API to fetch and return the view count of a specified article for a given month.
+This documentation provides details on the API endpoint and setup instructions for the Docker environment of the `''` project. The project includes a Node.js application that interfaces with the Wikipedia API to fetch and return the view count of a specified article for a given month.
 
 ### Getting Started
 
-To set up the `gth-engineering-hometake` project locally, including installing its dependencies, follow these step-by-step instructions. This guide assumes you have Node.js and npm (Node Package Manager) already installed on your machine. If you haven't installed Node.js and npm yet, visit [Node.js official website](https://nodejs.org/) to download and install them before proceeding.
+To set up the `''` project locally, including installing its dependencies, follow these step-by-step instructions. This guide assumes you have Node.js and npm (Node Package Manager) already installed on your machine. If you haven't installed Node.js and npm yet, visit [Node.js official website](https://nodejs.org/) to download and install them before proceeding.
 
 #### Clone the Project
 
@@ -18,7 +18,7 @@ git clone URL_OF_THE_PROJECT
 Navigate into the project directory:
 
 ```bash
-cd gth-engineering-hometake
+cd ''
 ```
 
 #### Install Dependencies
